@@ -9,7 +9,6 @@
   ],
   "description": "Manual and Explorable JavaScript Data Structures",
   "repository": "github:eldarlrd/js-data-structures",
-  "homepage": "https://eldarlrd.github.io/js-data-structures",
   "author": "Eldar Pashazade <eldarlrd@pm.me> (https://eldarlrd.github.io)",
   "license": "GPL-3.0-only",
   "scripts": {
