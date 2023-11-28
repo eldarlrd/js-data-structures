@@ -28,6 +28,7 @@
     "import/group-exports": 2,
     "jest/no-deprecated-functions": 0,
     "n/no-missing-import": 0,
+    // "no-unused-vars": 0,
     "eqeqeq": 2
   }
 }
