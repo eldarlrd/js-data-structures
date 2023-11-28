@@ -19,3 +19,5 @@
  */
 
 import LinkedList from './data-structures/linked-list/index.js';
+
+const linkedList = new LinkedList();
