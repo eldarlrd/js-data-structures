@@ -1,9 +1,8 @@
 {
   "root": true,
   "env": {
-    "browser": true,
-    "commonjs": true,
-    "es2021": true
+    "node": true,
+    "es2022": true
   },
   "extends": [
     "eslint:recommended",
@@ -12,13 +11,6 @@
     "plugin:promise/recommended",
     "prettier"
   ],
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx"]
-      }
-    }
-  },
   "plugins": ["import", "n"],
   "rules": {
     "import/order": [2, { "newlines-between": "always", "alphabetize": { "order": "asc" } }],
@@ -26,9 +18,8 @@
     "import/extensions": [2, "ignorePackages"],
     "import/no-useless-path-segments": 2,
     "import/group-exports": 2,
-    "jest/no-deprecated-functions": 0,
     "n/no-missing-import": 0,
-    // "no-unused-vars": 0,
+    "no-unused-vars": 0,
     "eqeqeq": 2
   }
 }
