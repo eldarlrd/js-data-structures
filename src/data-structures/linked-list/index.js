@@ -124,7 +124,7 @@ export default class LinkedList {
   }
 
   /**
-   * @returns {string} LinkedList objects as strings.
+   * @returns {string} Linked list objects as strings.
    */
   toString() {
     let temp = this.listHead;
