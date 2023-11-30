@@ -1,5 +1,15 @@
 import Node from './node.js';
 
+/**
+ * A linked list is a linear collection of data elements called
+ * nodes that "point" to the next node by means of a pointer.
+ *
+ * Each node holds a single element of data and
+ * a link or pointer to the next node in the list.
+ *
+ * A head node is the first node in the list,
+ * a tail node is the last node in the list.
+ */
 export default class LinkedList {
   constructor() {
     this.listHead = null;
@@ -43,14 +53,14 @@ export default class LinkedList {
   }
 
   /**
-   * @returns {number} The first node in the list.
+   * @returns {number} The first value in the list.
    */
   head() {
     return this.listHead;
   }
 
   /**
-   * @returns {number} The last node in the list.
+   * @returns {number} The last value in the list.
    */
   tail() {
     let tail = this.listHead;
@@ -60,13 +70,13 @@ export default class LinkedList {
 
   /**
    * @param {number} index - Passed in index to check.
-   * @returns The node at the given index.
+   * @returns {(number | null)} The value at the given index.
    */
   at(index) {
     let currIndex = this.listHead;
     for (let i = 0; i < index; i++) {
       currIndex = currIndex.nextNode;
-      if (currIndex === null) return;
+      if (currIndex === null) return null;
     }
     return currIndex;
   }
@@ -97,9 +107,34 @@ export default class LinkedList {
     return false;
   }
 
-  find(value) {}
+  /**
+   * @param {number} value - Passed in value to find.
+   * @returns {(number | null)} The index of the node containing value,
+   * or null if not found.
+   */
+  find(value) {
+    let temp = this.listHead;
+    let index = 0;
+    while (temp !== null) {
+      if (temp.value === value) return index;
+      temp = temp.nextNode;
+      index++;
+    }
+    return null;
+  }
 
-  toString() {}
+  /**
+   * @returns {string} LinkedList objects as strings.
+   */
+  toString() {
+    let temp = this.listHead;
+    let stringList = '';
+    while (temp !== null) {
+      stringList += `( ${temp.value} ) -> `;
+      temp = temp.nextNode;
+    }
+    return (stringList += 'null');
+  }
 
   insertAt(value, index) {}
 
