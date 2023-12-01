@@ -18,6 +18,50 @@
  * along with JavaScript Data Structures. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import LinkedList from './data-structures/linked-list/index.js';
+import { stdin as input, stdout as output } from 'node:process';
+import * as readline from 'node:readline/promises';
 
-const linkedList = new LinkedList();
+import linkedListCli from './data-structures/linked-list/cli.js';
+
+// Copyright Notice
+console.log(`
+  JavaScript Data Structures Copyright (C) 2023 Eldar Pashazade <eldarlrd@pm.me>
+  This program comes with ABSOLUTELY NO WARRANTY;
+  This is free software, and you are welcome to redistribute it
+  under certain conditions;
+`);
+
+// Introduction
+console.log('Below is a list of manual and explorable data structures:');
+
+// Data Structures
+console.log(`
+  1. Linked List - A linear collection of data elements.
+`);
+
+// Quit Program
+console.log(`  "q" to close the program.
+`);
+
+const rl = readline.createInterface({ input, output });
+
+const getInput = () =>
+  rl.question('Enter the corresponding order number to explore: ');
+
+const run = () =>
+  getInput()
+    .then(answer => {
+      switch (answer) {
+        case 'q':
+          return rl.close();
+        case '1':
+          return linkedListCli(answer, () => rl.close());
+        default:
+          return run();
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+run();

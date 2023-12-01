@@ -17,10 +17,10 @@ export default class LinkedList {
 
   /**
    * Adds a new node containing value to the end of the list.
-   * @param {number} value - Passed in value to add.
+   * @param {string} value - Passed in value to add.
    */
   append(value) {
-    if (this.listHead !== null) this.prepend(value);
+    if (this.listHead === null) this.prepend(value);
     else {
       let temp = this.listHead;
       while (temp.nextNode !== null) temp = temp.nextNode;
@@ -30,7 +30,7 @@ export default class LinkedList {
 
   /**
    * Adds a new node containing value to the start of the list.
-   * @param {number} value - Passed in value to add.
+   * @param {string} value - Passed in value to add.
    */
   prepend(value) {
     let temp = null;
@@ -40,7 +40,7 @@ export default class LinkedList {
   }
 
   /**
-   * @returns {number} The total number of nodes in the list.
+   * @returns {number} Total number of nodes in the list.
    */
   size() {
     let temp = this.listHead;
@@ -53,24 +53,24 @@ export default class LinkedList {
   }
 
   /**
-   * @returns {number} The first value in the list.
+   * @returns {string} First value in the list.
    */
   head() {
-    return this.listHead;
+    return this.listHead.value;
   }
 
   /**
-   * @returns {number} The last value in the list.
+   * @returns {string} Last value in the list.
    */
   tail() {
     let tail = this.listHead;
     while (tail.nextNode !== null) tail = tail.nextNode;
-    return tail;
+    return tail.value;
   }
 
   /**
    * @param {number} index - Passed in index to check.
-   * @returns {(number | null)} The value at the given index.
+   * @returns {(string | null)} Value at the given index.
    */
   at(index) {
     let currIndex = this.listHead;
@@ -78,7 +78,7 @@ export default class LinkedList {
       currIndex = currIndex.nextNode;
       if (currIndex === null) return null;
     }
-    return currIndex;
+    return currIndex.value;
   }
 
   /**
@@ -95,7 +95,7 @@ export default class LinkedList {
   }
 
   /**
-   * @param {number} value - Passed in value to check.
+   * @param {string} value - Passed in value to check.
    * @returns {boolean} true if the value is in the list, false if not.
    */
   contains(value) {
@@ -108,8 +108,8 @@ export default class LinkedList {
   }
 
   /**
-   * @param {number} value - Passed in value to find.
-   * @returns {(number | null)} The index of the node containing value,
+   * @param {string} value - Passed in value to find.
+   * @returns {(number | null)} Index of the node containing value,
    * or null if not found.
    */
   find(value) {
@@ -136,7 +136,41 @@ export default class LinkedList {
     return (stringList += 'null');
   }
 
-  insertAt(value, index) {}
+  /**
+   * Inserts a new node with the provided value at the given index.
+   * @param {string} value - Passed in value to be assigned.
+   * @param {number} index - Node index to add and be assigned to.
+   */
+  insertAt(value, index) {
+    if (this.listHead === null) this.prepend(value);
+    else {
+      let prev = null;
+      let curr = this.listHead;
+      for (let i = 0; i < index; i++) {
+        prev = curr;
+        curr = curr.nextNode;
+        if (curr === null) break;
+      }
+      const temp = new Node(value);
+      prev.nextNode = temp;
+      temp.nextNode = curr;
+    }
+  }
 
-  removeAt(index) {}
+  /**
+   * Removes the node at the given index.
+   * @param {number} index - Passed in index to remove.
+   * @returns {(void | null)} Null if the list is empty,
+   * or has no element at the passed index.
+   */
+  removeAt(index) {
+    if (this.listHead === null) return null;
+    let curr = this.listHead;
+    let prev = null;
+    for (let i = 0; i < index; i++) {
+      prev = curr;
+      curr = curr.nextNode;
+    }
+    prev.nextNode = curr.nextNode;
+  }
 }
