@@ -15,6 +15,8 @@ export default class LinkedList {
     this.listHead = null;
   }
 
+  // Add commands
+
   /**
    * Adds a new node containing value to the end of the list.
    * @param {string} value - Passed in value to add.
@@ -40,45 +42,43 @@ export default class LinkedList {
   }
 
   /**
-   * @returns {number} Total number of nodes in the list.
+   * Inserts a new node with the provided value at the given index.
+   * @param {string} value - Passed in value to be assigned.
+   * @param {number} index - Node index to add and be assigned to.
    */
-  size() {
-    let temp = this.listHead;
-    let listSize = 0;
-    while (temp !== null) {
-      temp = temp.nextNode;
-      listSize++;
+  insertAt(value, index) {
+    if (this.listHead === null) this.prepend(value);
+    else {
+      let prev = null;
+      let curr = this.listHead;
+      for (let i = 0; i < index; i++) {
+        prev = curr;
+        curr = curr.nextNode;
+        if (curr === null) break;
+      }
+      const temp = new Node(value);
+      prev.nextNode = temp;
+      temp.nextNode = curr;
     }
-    return listSize;
   }
 
-  /**
-   * @returns {string} First value in the list.
-   */
-  head() {
-    return this.listHead.value;
-  }
+  // Remove commands
 
   /**
-   * @returns {string} Last value in the list.
+   * Removes the node at the given index.
+   * @param {number} index - Passed in index to remove.
+   * @returns {(void | null)} Null if the list is empty,
+   * or has no element at the passed index.
    */
-  tail() {
-    let tail = this.listHead;
-    while (tail.nextNode !== null) tail = tail.nextNode;
-    return tail.value;
-  }
-
-  /**
-   * @param {number} index - Passed in index to check.
-   * @returns {(string | null)} Value at the given index.
-   */
-  at(index) {
-    let currIndex = this.listHead;
+  removeAt(index) {
+    if (this.listHead === null) return null;
+    let curr = this.listHead;
+    let prev = null;
     for (let i = 0; i < index; i++) {
-      currIndex = currIndex.nextNode;
-      if (currIndex === null) return null;
+      prev = curr;
+      curr = curr.nextNode;
     }
-    return currIndex.value;
+    prev.nextNode = curr.nextNode;
   }
 
   /**
@@ -93,6 +93,8 @@ export default class LinkedList {
     }
     prev.nextNode = null;
   }
+
+  // Check commands
 
   /**
    * @param {string} value - Passed in value to check.
@@ -124,6 +126,48 @@ export default class LinkedList {
   }
 
   /**
+   * @param {number} index - Passed in index to check.
+   * @returns {(string | null)} Value at the given index.
+   */
+  at(index) {
+    let currIndex = this.listHead;
+    for (let i = 0; i < index; i++) {
+      currIndex = currIndex.nextNode;
+      if (currIndex === null) return null;
+    }
+    return currIndex.value;
+  }
+
+  /**
+   * @returns {string} First value in the list.
+   */
+  head() {
+    return this.listHead.value;
+  }
+
+  /**
+   * @returns {string} Last value in the list.
+   */
+  tail() {
+    let tail = this.listHead;
+    while (tail.nextNode !== null) tail = tail.nextNode;
+    return tail.value;
+  }
+
+  /**
+   * @returns {number} Total number of nodes in the list.
+   */
+  size() {
+    let temp = this.listHead;
+    let listSize = 0;
+    while (temp !== null) {
+      temp = temp.nextNode;
+      listSize++;
+    }
+    return listSize;
+  }
+
+  /**
    * @returns {string} Linked list objects as strings.
    */
   toString() {
@@ -134,43 +178,5 @@ export default class LinkedList {
       temp = temp.nextNode;
     }
     return (stringList += 'null');
-  }
-
-  /**
-   * Inserts a new node with the provided value at the given index.
-   * @param {string} value - Passed in value to be assigned.
-   * @param {number} index - Node index to add and be assigned to.
-   */
-  insertAt(value, index) {
-    if (this.listHead === null) this.prepend(value);
-    else {
-      let prev = null;
-      let curr = this.listHead;
-      for (let i = 0; i < index; i++) {
-        prev = curr;
-        curr = curr.nextNode;
-        if (curr === null) break;
-      }
-      const temp = new Node(value);
-      prev.nextNode = temp;
-      temp.nextNode = curr;
-    }
-  }
-
-  /**
-   * Removes the node at the given index.
-   * @param {number} index - Passed in index to remove.
-   * @returns {(void | null)} Null if the list is empty,
-   * or has no element at the passed index.
-   */
-  removeAt(index) {
-    if (this.listHead === null) return null;
-    let curr = this.listHead;
-    let prev = null;
-    for (let i = 0; i < index; i++) {
-      prev = curr;
-      curr = curr.nextNode;
-    }
-    prev.nextNode = curr.nextNode;
   }
 }

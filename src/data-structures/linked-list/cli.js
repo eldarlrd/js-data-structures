@@ -3,35 +3,97 @@ import LinkedList from './index.js';
 const linkedList = new LinkedList();
 
 export default function linkedListCli(question, quit) {
-  // Intro
-  console.log(`
-Available commands for Linked List:`);
+  const help = () =>
+    console.log(`
+Available commands for Linked List:
 
-  // Command List
-  console.log(`
-  append {value} - Adds a new node containing value to the end of the list.
-  prepend {value} - Adds a new node containing value to the start of the list.
-  size - Total number of nodes in the list.
-  head - First value in the list.
-  tail - Last value in the list.
-  at {value} - Value at the given index.
-  pop - Removes the last element from the list.
-  contains {value} - true if the value is in the list, false if not.
-  find {value} - Index of the node containing value, or null if not found.
-  toString - Linked list objects as strings.
-  insertAt {value} {index} - Inserts a new node with the provided value at the given index.
-  removeAt {index} - Removes the node at the given index.
+  Add:
+    append {value} - Adds a new node containing value to the end of the list.
+    prepend {value} - Adds a new node containing value to the start of the list.
+    insertAt {value} {index} - Inserts a new node with the provided value at the given index.
+
+  Remove:
+    removeAt {index} - Removes the node at the given index.
+    pop - Removes the last element from the list.
+
+  Check:
+    contains {value} - true if the value is in the list, false if not.
+    find {value} - Index of the node containing value, or null if not found.
+    at {index} - Value at the given index.
+    head - First value in the list.
+    tail - Last value in the list.
+    size - Total number of nodes in the list.
+    toString - Linked list objects as strings.
+
+    "h" to see this list again.
+    "q" to close the program.
   `);
 
-  // Quit Program
-console.log(`  "q" to close the program.
-`);
+  const run = () =>
+    question('Command: ')
+      .then(answer => {
+        const [command, ...args] = answer.split(/\s+/);
+        switch (command) {
+          case 'append':
+            linkedList.append(args[0]);
+            return run();
+          case 'prepend':
+            linkedList.prepend(args[0]);
+            return run();
+          case 'insertAt': // Buggy
+            linkedList.insertAt(args[0], args[1]);
+            return run();
 
-  question('Command: ').then(answer => {
-    switch (answer) {
+          case 'removeAt':
+            linkedList.removeAt(args[0]);
+            return run();
+          case 'pop': // Buggy
+            linkedList.pop();
+            return run();
 
-    }
-  }).catch(error => {
-    console.log('Error:', error)
-  });
+          case 'contains':
+            console.log(linkedList.contains(args[0]));
+            return run();
+          case 'find':
+            console.log(
+              `The index of the value ${args[0]} is`,
+              linkedList.find(args[0])
+            );
+            return run();
+          case 'at': // Buggy
+            console.log(
+              `The value at index ${args[0]} is`,
+              linkedList.at(args[0])
+            );
+            return run();
+          case 'head': // Buggy
+            console.log('The first value in the list is', linkedList.head());
+            return run();
+          case 'tail': // Buggy
+            console.log('The last value in the list is', linkedList.tail());
+            return run();
+          case 'size':
+            console.log('The size of the list is', linkedList.size());
+            return run();
+          case 'toString':
+            console.log(linkedList.toString());
+            return run();
+
+          case 'h':
+            help();
+            return run();
+          case 'q':
+            return quit();
+
+          default:
+            console.log('Unknown command.');
+            return run();
+        }
+      })
+      .catch(error => {
+        console.log('Error:', error);
+      });
+
+  help();
+  run();
 }
