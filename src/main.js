@@ -31,7 +31,7 @@ console.log(`
   under certain conditions;
 `);
 
-// Introduction
+// Intro
 console.log('Below is a list of manual and explorable data structures:');
 
 // Data Structures
@@ -55,7 +55,10 @@ const run = () =>
         case 'q':
           return rl.close();
         case '1':
-          return linkedListCli(answer, () => rl.close());
+          return linkedListCli(
+            e => rl.question(e),
+            () => rl.close()
+          );
         default:
           return run();
       }
