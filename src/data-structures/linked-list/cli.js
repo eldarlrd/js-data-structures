@@ -1,3 +1,5 @@
+import { mainHelp, mainRun } from '../../main.js';
+
 import LinkedList from './index.js';
 
 export default function linkedListCli(question, quit) {
@@ -25,6 +27,7 @@ Available commands for Linked List:
     "size" - Total number of nodes in the list.
     "toString" - Linked list objects as strings.
 
+    "b" to go back to the menu.
     "h" to see this list again.
     "q" to close the program.
   `);
@@ -90,6 +93,9 @@ Available commands for Linked List:
             console.log(linkedList.toString());
             return run();
 
+          case 'b':
+            mainHelp();
+            return mainRun();
           case 'h':
             help();
             return run();

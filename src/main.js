@@ -45,7 +45,7 @@ const notice = () =>
   This is free software, and you are welcome to redistribute it
   under certain conditions; type "c" for details.`);
 
-const help = () =>
+const mainHelp = () =>
   console.log(`
 Below is a list of manual and explorable data structures:
 
@@ -58,7 +58,7 @@ Below is a list of manual and explorable data structures:
 
 const rl = readline.createInterface({ input, output });
 
-const run = () =>
+const mainRun = () =>
   rl
     .question('Enter the corresponding order number to explore: ')
     .then(answer => {
@@ -72,23 +72,23 @@ const run = () =>
         case 'n':
           notice();
           console.log();
-          return run();
+          return mainRun();
         case 'w':
           warranty();
-          return run();
+          return mainRun();
         case 'c':
           conditions();
-          return run();
+          return mainRun();
 
         case 'h':
-          help();
-          return run();
+          mainHelp();
+          return mainRun();
         case 'q':
           return rl.close();
 
         default:
           console.log('Unknown command.');
-          return run();
+          return mainRun();
       }
     })
     .catch(error => {
@@ -96,5 +96,7 @@ const run = () =>
     });
 
 notice();
-help();
-run();
+mainHelp();
+mainRun();
+
+export { mainHelp, mainRun };

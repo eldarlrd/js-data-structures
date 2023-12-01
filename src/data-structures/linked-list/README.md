@@ -1,0 +1,23 @@
+# Linked List
+
+> Singly linked list written in JavaScript  
+> with a command line interface to explore it.
+
+## Commands
+### Add
+- `append {value}` - Adds a new node containing value to the end of the list.
+- `prepend {value}` - Adds a new node containing value to the start of the list.
+- `insertAt {value} {index}` - Inserts a new node with the provided value at the given index.
+
+### Remove
+- `removeAt {index}` - Removes the node at the given index.
+- `pop` - Removes the last element from the list.
+
+### Check
+- `contains {value}` - true if the value is in the list, false if not.
+- `find {value}` - Index of the node containing value, or null if not found.
+- `at {index}` - Value at the given index.
+- `head` - First value in the list.
+- `tail` - Last value in the list.
+- `size` - Total number of nodes in the list.
+- `toString` - Linked list objects as strings.
