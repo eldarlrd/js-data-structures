@@ -6,6 +6,7 @@
 > handles manual data structures and applies various  
 > computer science techniques for exploring them.
 > - **[Linked List](https://github.com/eldarlrd/js-data-structures/tree/main/src/data-structures/linked-list)**
+> - **[Binary Search Trees](https://github.com/eldarlrd/js-data-structures/tree/main/src/data-structures/binary-search-trees)**
 
 ## Install
 ```sh

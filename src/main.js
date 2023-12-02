@@ -23,6 +23,7 @@ import * as readline from 'node:readline/promises';
 
 import clc from 'cli-color';
 
+import binarySearchTreesCli from './data-structures/binary-search-trees/cli.js';
 import linkedListCli from './data-structures/linked-list/cli.js';
 
 const warranty = () =>
@@ -59,7 +60,8 @@ Below is a list of manual and explorable data structures:`);
 
   console.log(
     clc.cyanBright(`
-  1. Linked List - A linear collection of data elements.`)
+  1. Linked List - A linear collection of data elements.
+  2. Binary Search Trees - Traversing a tree of nodes.`)
   );
 
   console.log(
@@ -83,6 +85,8 @@ const mainRun = () =>
             e => rl.question(e),
             () => rl.close()
           );
+        case '2':
+          return binarySearchTreesCli();
 
         case 'n':
           notice();
