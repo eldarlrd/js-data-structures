@@ -87,7 +87,7 @@ const mainRun = () =>
           return rl.close();
 
         default:
-          console.log('Unknown command.');
+          console.log('Unknown command');
           return mainRun();
       }
     })

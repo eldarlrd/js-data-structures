@@ -42,21 +42,29 @@ export default class LinkedList {
   }
 
   /**
-   * Inserts a new node with the provided value at the given index.
+   * Inserts a new node with the provided value at the passed index.
    * @param {string} value - Passed in value to be assigned.
    * @param {number} index - Node index to add and be assigned to.
    */
   insert(value, index) {
+    index = ~~+index;
     if (this.listHead === null) this.prepend(value);
     else {
       let prev = null;
       let curr = this.listHead;
+
       for (let i = 0; i < index; i++) {
         prev = curr;
-        curr = curr.nextNode;
         if (curr === null) break;
+        curr = curr.nextNode;
       }
+
       const temp = new Node(value);
+      if (prev === null) {
+        if (index <= 0) return this.prepend(value);
+        else return this.append(value);
+      }
+
       prev.nextNode = temp;
       temp.nextNode = curr;
     }
@@ -65,33 +73,53 @@ export default class LinkedList {
   // Delete commands
 
   /**
-   * Removes the node at the given index.
+   * Removes the node at the passed index.
    * @param {number} index - Passed in index to remove.
-   * @returns {(void | null)} Null if the list is empty,
-   * or has no element at the passed index.
+   * @returns {string} String on removal at the passed index.
    */
   remove(index) {
-    if (this.listHead === null) return null;
+    index = ~~+index;
+    if (this.listHead === null) return 'List is empty';
     let curr = this.listHead;
     let prev = null;
+
     for (let i = 0; i < index; i++) {
       prev = curr;
+      if (curr === null) break;
       curr = curr.nextNode;
     }
+
+    if (prev === null) return this.pop();
     prev.nextNode = curr.nextNode;
+    return 'Node removed';
   }
 
   /**
    * Removes the last element from the list.
+   * @returns {string} String on removal of last element.
    */
   pop() {
+    if (this.listHead === null) return 'List is empty';
     let prev = null;
     let curr = this.listHead;
+
     while (curr.nextNode !== null) {
       prev = curr;
       curr = curr.nextNode;
     }
+
+    if (prev === null) return this.clear();
     prev.nextNode = null;
+    return 'Last node removed';
+  }
+
+  /**
+   * Clears all elements from the list.
+   * @returns {string} String on successful clear.
+   */
+  clear() {
+    this.listHead = null;
+    return 'List has been cleared';
   }
 
   // View commands
@@ -102,39 +130,47 @@ export default class LinkedList {
    */
   has(value) {
     let temp = this.listHead;
+
     while (temp !== null) {
       if (temp.value === value) return true;
       temp = temp.nextNode;
     }
+
     return false;
   }
 
   /**
    * @param {string} value - Passed in value to find.
-   * @returns {(number | null)} Index of the node containing value,
-   * or null if not found.
+   * @returns {(number | string)} Index of the node containing value,
+   * or string if not found.
    */
   find(value) {
     let temp = this.listHead;
     let index = 0;
+
     while (temp !== null) {
       if (temp.value === value) return index;
       temp = temp.nextNode;
       index++;
     }
-    return null;
+
+    return 'not found';
   }
 
   /**
    * @param {number} index - Passed in index to check.
-   * @returns {(string | null)} Value at the given index.
+   * @returns {string} Value at the passed index.
    */
   at(index) {
+    index = ~~+index;
     let currIndex = this.listHead;
+
     for (let i = 0; i < index; i++) {
-      currIndex = currIndex.nextNode;
-      if (currIndex === null) return null;
+      currIndex = currIndex?.nextNode;
+      if (currIndex === null || currIndex === undefined) return 'not found';
     }
+
+    if (currIndex === null) return 'not found';
     return currIndex.value;
   }
 
@@ -142,6 +178,7 @@ export default class LinkedList {
    * @returns {string} First value in the list.
    */
   head() {
+    if (this.listHead === null) return 'empty';
     return this.listHead.value;
   }
 
@@ -149,6 +186,7 @@ export default class LinkedList {
    * @returns {string} Last value in the list.
    */
   tail() {
+    if (this.listHead === null) return 'empty';
     let tail = this.listHead;
     while (tail.nextNode !== null) tail = tail.nextNode;
     return tail.value;
@@ -160,10 +198,12 @@ export default class LinkedList {
   size() {
     let temp = this.listHead;
     let listSize = 0;
+
     while (temp !== null) {
       temp = temp.nextNode;
       listSize++;
     }
+
     return listSize;
   }
 
@@ -173,10 +213,12 @@ export default class LinkedList {
   show() {
     let temp = this.listHead;
     let stringList = '';
+
     while (temp !== null) {
       stringList += `( ${temp.value} ) -> `;
       temp = temp.nextNode;
     }
+
     return (stringList += 'null');
   }
 }

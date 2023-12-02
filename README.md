@@ -5,6 +5,7 @@
 > JavaScript Data Structures is a repository that  
 > handles manual data structures and applies various  
 > computer science techniques for exploring them.
+> - **[Linked List](https://github.com/eldarlrd/js-data-structures/tree/main/src/data-structures/linked-list)**
 
 ## Install
 ```sh

@@ -1,7 +1,7 @@
 {
   "name": "js-data-structures",
   "private": true,
-  "version": "0.1.8",
+  "version": "0.1.9",
   "type": "module",
   "keywords": [
     "data-structures",
@@ -25,7 +25,7 @@
     "arrowParens": "avoid"
   },
   "devDependencies": {
-    "eslint": "^8.54.0",
+    "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-n": "^16.3.1",
