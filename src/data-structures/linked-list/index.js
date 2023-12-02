@@ -46,7 +46,7 @@ export default class LinkedList {
    * @param {string} value - Passed in value to be assigned.
    * @param {number} index - Node index to add and be assigned to.
    */
-  insertAt(value, index) {
+  insert(value, index) {
     if (this.listHead === null) this.prepend(value);
     else {
       let prev = null;
@@ -62,7 +62,7 @@ export default class LinkedList {
     }
   }
 
-  // Remove commands
+  // Delete commands
 
   /**
    * Removes the node at the given index.
@@ -70,7 +70,7 @@ export default class LinkedList {
    * @returns {(void | null)} Null if the list is empty,
    * or has no element at the passed index.
    */
-  removeAt(index) {
+  remove(index) {
     if (this.listHead === null) return null;
     let curr = this.listHead;
     let prev = null;
@@ -94,13 +94,13 @@ export default class LinkedList {
     prev.nextNode = null;
   }
 
-  // Check commands
+  // View commands
 
   /**
    * @param {string} value - Passed in value to check.
    * @returns {boolean} true if the value is in the list, false if not.
    */
-  contains(value) {
+  has(value) {
     let temp = this.listHead;
     while (temp !== null) {
       if (temp.value === value) return true;
@@ -170,7 +170,7 @@ export default class LinkedList {
   /**
    * @returns {string} Linked list objects as strings.
    */
-  toString() {
+  show() {
     let temp = this.listHead;
     let stringList = '';
     while (temp !== null) {

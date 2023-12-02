@@ -12,20 +12,20 @@ Available commands for Linked List:
   Add:
     "append {value}" - Adds a new node containing value to the end of the list.
     "prepend {value}" - Adds a new node containing value to the start of the list.
-    "insertAt {value} {index}" - Inserts a new node with the provided value at the given index.
+    "insert {value} {index}" - Inserts a new node with the provided value at the given index.
 
-  Remove:
-    "removeAt {index}" - Removes the node at the given index.
+  Delete:
+    "remove {index}" - Removes the node at the given index.
     "pop" - Removes the last element from the list.
 
-  Check:
-    "contains {value}" - true if the value is in the list, false if not.
+  View:
+    "has {value}" - true if the value is in the list, false if not.
     "find {value}" - Index of the node containing value, or null if not found.
     "at {index}" - Value at the given index.
     "head" - First value in the list.
     "tail" - Last value in the list.
     "size" - Total number of nodes in the list.
-    "toString" - Linked list objects as strings.
+    "show" - Linked list objects as strings.
 
     "b" to go back to the menu.
     "h" to see this list again.
@@ -44,12 +44,12 @@ Available commands for Linked List:
             linkedList.prepend(args[0]);
             return run();
 
-          case 'removeAt':
-            linkedList.removeAt(args[0]);
+          case 'remove':
+            linkedList.remove(args[0]);
             return run();
 
-          case 'contains':
-            console.log(linkedList.contains(args[0]));
+          case 'has':
+            console.log(linkedList.has(args[0]));
             return run();
           case 'find':
             console.log(
@@ -59,8 +59,8 @@ Available commands for Linked List:
             return run();
 
           // BUGGY
-          case 'insertAt':
-            linkedList.insertAt(args[0], args[1]);
+          case 'insert':
+            linkedList.insert(args[0], args[1]);
             return run();
 
           // BUGGY
@@ -89,8 +89,8 @@ Available commands for Linked List:
           case 'size':
             console.log('The size of the list is', linkedList.size());
             return run();
-          case 'toString':
-            console.log(linkedList.toString());
+          case 'show':
+            console.log(linkedList.show());
             return run();
 
           case 'b':
