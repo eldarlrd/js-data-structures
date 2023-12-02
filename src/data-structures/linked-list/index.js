@@ -20,35 +20,40 @@ export default class LinkedList {
   /**
    * Adds a new node containing value to the end of the list.
    * @param {string} value - Passed in value to add.
+   * @returns {string} String on success.
    */
   append(value) {
-    if (this.listHead === null) this.prepend(value);
+    if (this.listHead === null) return this.prepend(value);
     else {
       let temp = this.listHead;
       while (temp.nextNode !== null) temp = temp.nextNode;
       temp.nextNode = new Node(value);
+      return 'Node added to the end';
     }
   }
 
   /**
    * Adds a new node containing value to the start of the list.
    * @param {string} value - Passed in value to add.
+   * @returns {string} String on success.
    */
   prepend(value) {
     let temp = null;
     if (this.listHead !== null) temp = this.listHead;
     this.listHead = new Node(value);
     this.listHead.nextNode = temp;
+    return 'Node added to the start';
   }
 
   /**
    * Inserts a new node with the provided value at the passed index.
    * @param {string} value - Passed in value to be assigned.
    * @param {number} index - Node index to add and be assigned to.
+   * @returns {string} String on success.
    */
   insert(value, index) {
     index = ~~+index;
-    if (this.listHead === null) this.prepend(value);
+    if (this.listHead === null) return this.prepend(value);
     else {
       let prev = null;
       let curr = this.listHead;
@@ -67,6 +72,7 @@ export default class LinkedList {
 
       prev.nextNode = temp;
       temp.nextNode = curr;
+      return `Node added at the index ${index}`;
     }
   }
 
@@ -89,7 +95,7 @@ export default class LinkedList {
       curr = curr.nextNode;
     }
 
-    if (prev === null) return this.pop();
+    if (prev === null || curr === null) return this.pop();
     prev.nextNode = curr.nextNode;
     return 'Node removed';
   }

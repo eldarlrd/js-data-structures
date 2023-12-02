@@ -21,40 +21,55 @@
 import { stdin as input, stdout as output } from 'node:process';
 import * as readline from 'node:readline/promises';
 
+import clc from 'cli-color';
+
 import linkedListCli from './data-structures/linked-list/cli.js';
 
 const warranty = () =>
-  console.log(`
+  console.log(
+    clc.magentaBright(`
   JavaScript Data Structures is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
   GNU General Public License for more details.
-`);
+`)
+  );
 
 const conditions = () =>
-  console.log(`
+  console.log(
+    clc.magentaBright(`
   JavaScript Data Structures is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, version 3.
-`);
+`)
+  );
 
 const notice = () =>
-  console.log(`
+  console.log(
+    clc.magentaBright(`
   JavaScript Data Structures Copyright (C) 2023 Eldar Pashazade <eldarlrd@pm.me>
   This program comes with ABSOLUTELY NO WARRANTY; for details type "w".
   This is free software, and you are welcome to redistribute it
-  under certain conditions; type "c" for details.`);
+  under certain conditions; type "c" for details.`)
+  );
 
-const mainHelp = () =>
+const mainHelp = () => {
   console.log(`
-Below is a list of manual and explorable data structures:
+Below is a list of manual and explorable data structures:`);
 
-  1. Linked List - A linear collection of data elements.
+  console.log(
+    clc.cyanBright(`
+  1. Linked List - A linear collection of data elements.`)
+  );
 
+  console.log(
+    clc.yellowBright(`
   "n" to see the copyright notice.
   "h" to see this list again.
   "q" to close the program.
-`);
+`)
+  );
+};
 
 const rl = readline.createInterface({ input, output });
 
@@ -87,12 +102,12 @@ const mainRun = () =>
           return rl.close();
 
         default:
-          console.log('Unknown command');
+          console.log(clc.redBright('Unknown command'));
           return mainRun();
       }
     })
     .catch(error => {
-      console.error('Error:', error);
+      console.error(clc.redBright(error));
     });
 
 notice();
