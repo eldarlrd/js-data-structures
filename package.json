@@ -1,7 +1,7 @@
 {
   "name": "js-data-structures",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "keywords": [
     "data-structures",
@@ -24,15 +24,17 @@
     "trailingComma": "none",
     "arrowParens": "avoid"
   },
+  "dependencies": {
+    "cli-color": "^2.0.3"
+  },
   "devDependencies": {
+    "@babel/core": "^7.23.5",
+    "@babel/eslint-parser": "^7.23.3",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-n": "^16.3.1",
     "eslint-plugin-promise": "^6.1.1",
     "prettier": "^3.1.0"
-  },
-  "dependencies": {
-    "cli-color": "^2.0.3"
   }
 }

@@ -86,7 +86,10 @@ const mainRun = () =>
             () => rl.close()
           );
         case '2':
-          return binarySearchTreesCli();
+          return binarySearchTreesCli(
+            e => rl.question(e),
+            () => rl.close()
+          );
 
         case 'n':
           notice();
