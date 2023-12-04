@@ -41,7 +41,7 @@ Demo for Binary Search Trees:`);
             bst = new BinarySearchTrees(getRandomArr(size));
             console.log();
             console.log(
-              clc.greenBright('Tree starts out balanced?'),
+              clc.greenBright('Tree starts balanced?'),
               bst.isBalanced()
             );
             console.log();
@@ -74,10 +74,7 @@ Demo for Binary Search Trees:`);
             bst.rebalance();
             console.log();
 
-            console.log(
-              clc.greenBright('Tree is now balanced?'),
-              bst.isBalanced()
-            );
+            console.log(clc.greenBright('What about now?'), bst.isBalanced());
             console.log();
 
             console.log(
