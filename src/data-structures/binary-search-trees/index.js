@@ -14,6 +14,11 @@ export default class BinarySearchTrees {
     this.root = this.buildTree(sortedArr);
   }
 
+  /**
+   * Generates a balanced binary tree.
+   * @param {number[]} sortedArr - Passed in array to start the tree.
+   * @returns {number[]} Tree root.
+   */
   buildTree(sortedArr) {
     if (sortedArr.length === 0) return null;
 
@@ -26,6 +31,11 @@ export default class BinarySearchTrees {
     return rootNode;
   }
 
+  /**
+   * Adds a new element to the tree.
+   * @param {number} value - Passed in value to add.
+   * @returns {number[]} Tree root.
+   */
   insert(value, rootNode = this.root) {
     if (rootNode === null) return new Node(value);
     if (rootNode.value === value) return;
@@ -36,6 +46,11 @@ export default class BinarySearchTrees {
     return rootNode;
   }
 
+  /**
+   * Retrieves the node with the value.
+   * @param {number} value - Passed in value to find.
+   * @returns {number[]} Node that holds the value.
+   */
   find(value, rootNode = this.root) {
     if (rootNode === null || rootNode.value === value) return rootNode;
 
@@ -43,6 +58,11 @@ export default class BinarySearchTrees {
     else return this.find(value, rootNode.right);
   }
 
+  /**
+   * Breadth-first level order.
+   * @param {() => void} [callback] - An optional callback function.
+   * @returns {number[]} Level ordered tree.
+   */
   levelOrder(callback) {
     const queue = [this.root];
     const levelOrderArr = [];
@@ -57,16 +77,12 @@ export default class BinarySearchTrees {
     if (levelOrderArr.length > 0) return levelOrderArr;
   }
 
-  inOrder(callback, rootNode = this.root, inOrderArr = []) {
-    if (rootNode === null) return;
-
-    this.inOrder(callback, rootNode.left, inOrderArr);
-    callback ? callback(rootNode) : inOrderArr.push(rootNode.value);
-    this.inOrder(callback, rootNode.right, inOrderArr);
-
-    if (inOrderArr.length > 0) return inOrderArr;
-  }
-
+  /**
+   * Pre order.
+   * @param {() => void} [callback] - An optional callback function.
+   * @param {number[]} [preOrderArr] - An optional starting array.
+   * @returns {number[]} Pre ordered tree.
+   */
   preOrder(callback, rootNode = this.root, preOrderArr = []) {
     if (rootNode === null) return;
 
@@ -77,6 +93,12 @@ export default class BinarySearchTrees {
     if (preOrderArr.length > 0) return preOrderArr;
   }
 
+  /**
+   * Post order.
+   * @param {() => void} [callback] - An optional callback function.
+   * @param {number[]} [postOrderArr] - An optional starting array.
+   * @returns {number[]} Post ordered tree.
+   */
   postOrder(callback, rootNode = this.root, postOrderArr = []) {
     if (rootNode === null) return;
 
@@ -87,6 +109,28 @@ export default class BinarySearchTrees {
     if (postOrderArr.length > 0) return postOrderArr;
   }
 
+  /**
+   * Value order.
+   * @param {() => void} [callback] - An optional callback function.
+   * @param {number[]} [inOrderArr] - An optional starting array.
+   * @returns {number[]} Value ordered tree.
+   */
+  inOrder(callback, rootNode = this.root, inOrderArr = []) {
+    if (rootNode === null) return;
+
+    this.inOrder(callback, rootNode.left, inOrderArr);
+    callback ? callback(rootNode) : inOrderArr.push(rootNode.value);
+    this.inOrder(callback, rootNode.right, inOrderArr);
+
+    if (inOrderArr.length > 0) return inOrderArr;
+  }
+
+  /**
+   * Height is defined as the number of edges in
+   * the longest path from a given node to a leaf node.
+   * @param {number[]} rootNode - Passed in node for the height.
+   * @returns {number} Height of the element.
+   */
   height(rootNode = this.root) {
     if (rootNode === null) return -1;
 
@@ -95,6 +139,12 @@ export default class BinarySearchTrees {
     return Math.max(leftHeight, rightHeight) + 1;
   }
 
+  /**
+   * Depth is defined as the number of edges in
+   * the path from a given node to the tree's root node.
+   * @param {number} rootNodeValue - Passed in value for the depth.
+   * @returns {number} Depth of the element.
+   */
   depth(rootNodeValue, rootNode = this.root, edges = 0) {
     if (rootNode === null) return;
     if (rootNode.value === rootNodeValue) return edges;
@@ -104,6 +154,13 @@ export default class BinarySearchTrees {
     else return this.depth(rootNodeValue, rootNode.right, edges + 1);
   }
 
+  /**
+   * Checks if the tree is balanced.
+   * A balanced tree is one where the difference between heights of
+   * the left subtree and the right subtree of every node is not more than 1.
+   * @param {number[]} [rootNode] - An optional parent node.
+   * @returns {boolean} true if is balanced, otherwise false.
+   */
   isBalanced(rootNode = this.root) {
     if (rootNode === null) return true;
 
@@ -118,11 +175,19 @@ export default class BinarySearchTrees {
     );
   }
 
+  /**
+   * Rebalances the tree.
+   */
   rebalance() {
     const inOrderArr = this.inOrder();
     this.root = this.buildTree(inOrderArr);
   }
 
+  /**
+   * Pretty Print for tree visualization by TOP.
+   *
+   * {@link https://theodinproject.com/lessons/javascript-binary-search-trees#assignment Provided in assignment.}
+   */
   prettyPrint(rootNode = this.root, prefix = '', isLeft = true) {
     if (rootNode === null) return;
     if (rootNode.right !== null)
