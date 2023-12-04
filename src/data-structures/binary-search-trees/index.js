@@ -96,6 +96,59 @@ export default class BinarySearchTrees {
     if (postOrderArr.length > 0) return postOrderArr;
   }
 
+  height(rootNode = this.root) {
+    if (rootNode === null) return 0;
+
+    const leftHeight = this.height(rootNode.left);
+    const rightHeight = this.height(rootNode.right);
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  depth(rootNodeValue, rootNode = this.root, edges) {
+    if (rootNode === null) return;
+    if (rootNode.value === rootNodeValue) return edges;
+
+    if (rootNode.value > rootNodeValue)
+      return this.depth(rootNodeValue, rootNode.left, edges + 1);
+    else return this.depth(rootNodeValue, rootNode.right, edges + 1);
+  }
+
+  isBalanced(rootNode = this.root) {
+    if (rootNode === null) return true;
+
+    const heightDiff = Math.abs(
+      this.height(rootNode.left) - this.height(rootNode.right)
+    );
+
+    return (
+      heightDiff <= 1 &&
+      this.isBalanced(rootNode.left) &&
+      this.isBalanced(rootNode.right)
+    );
+  }
+
+  rebalance() {
+    const inOrderArr = this.inOrder();
+    this.root = this.buildTree(inOrderArr);
+  }
+
+  prettyPrint(rootNode = this.root, prefix = '', isLeft = true) {
+    if (rootNode === null) return;
+    if (rootNode.right !== null)
+      this.prettyPrint(
+        rootNode.right,
+        `${prefix}${isLeft ? '│   ' : '    '}`,
+        false
+      );
+    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${rootNode.value}`);
+    if (rootNode.left !== null)
+      this.prettyPrint(
+        rootNode.left,
+        `${prefix}${isLeft ? '    ' : '│   '}`,
+        true
+      );
+  }
+
   #next(nodeChild) {
     let rootNode = nodeChild;
     while (rootNode.left) rootNode = rootNode.left;
