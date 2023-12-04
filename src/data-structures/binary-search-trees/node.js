@@ -5,8 +5,8 @@
  * @param {number} right - Right children of root.
  */
 export default class Node {
-  constructor(value, left, right) {
-    this.value = value || null;
+  constructor(value = null, left = null, right = null) {
+    this.value = value;
     this.left = left;
     this.right = right;
   }

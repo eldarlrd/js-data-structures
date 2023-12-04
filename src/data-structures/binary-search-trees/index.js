@@ -27,22 +27,13 @@ export default class BinarySearchTrees {
   }
 
   insert(value, rootNode = this.root) {
-    if (rootNode === null) return rootNode;
+    if (rootNode === null) return new Node(value);
     if (rootNode.value === value) return;
 
     if (rootNode.value > value)
       rootNode.left = this.insert(value, rootNode.left);
     else rootNode.right = this.insert(value, rootNode.right);
     return rootNode;
-  }
-
-  delete(value, rootNode = this.root) {
-    if (rootNode === null) return rootNode;
-    if (rootNode.value === value) rootNode = this.#remove(rootNode);
-
-    if (rootNode.value > value)
-      rootNode.left = this.delete(value, rootNode.left);
-    else rootNode.right = this.delete(value, rootNode.right);
   }
 
   find(value, rootNode = this.root) {
@@ -97,14 +88,14 @@ export default class BinarySearchTrees {
   }
 
   height(rootNode = this.root) {
-    if (rootNode === null) return 0;
+    if (rootNode === null) return -1;
 
     const leftHeight = this.height(rootNode.left);
     const rightHeight = this.height(rootNode.right);
     return Math.max(leftHeight, rightHeight) + 1;
   }
 
-  depth(rootNodeValue, rootNode = this.root, edges) {
+  depth(rootNodeValue, rootNode = this.root, edges = 0) {
     if (rootNode === null) return;
     if (rootNode.value === rootNodeValue) return edges;
 
@@ -147,24 +138,5 @@ export default class BinarySearchTrees {
         `${prefix}${isLeft ? '    ' : '│   '}`,
         true
       );
-  }
-
-  #next(nodeChild) {
-    let rootNode = nodeChild;
-    while (rootNode.left) rootNode = rootNode.left;
-    return rootNode;
-  }
-
-  #remove(rootNode) {
-    if (rootNode.left && rootNode.right) {
-      const nextNode = this.#next(rootNode.right);
-      rootNode.value = nextNode.value;
-      rootNode.right = this.delete(nextNode.value, rootNode.right);
-      return rootNode;
-    } else {
-      const swapNode = rootNode.right || rootNode.left;
-      rootNode = null;
-      return swapNode;
-    }
   }
 }
