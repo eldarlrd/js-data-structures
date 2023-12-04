@@ -23,9 +23,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-# PnP Zero-Installs
+# Yarn PnP
+.pnp.*
 .yarn/*
-!.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
