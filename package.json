@@ -1,21 +1,23 @@
 {
   "name": "js-data-structures",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "type": "module",
   "keywords": [
     "data-structures",
     "javascript"
   ],
+  "packageManager": "yarn@4.0.2",
   "description": "Manual and Explorable JavaScript Data Structures",
   "repository": "github:eldarlrd/js-data-structures",
   "author": "Eldar Pashazade <eldarlrd@pm.me> (https://eldarlrd.github.io)",
   "license": "GPL-3.0-only",
   "main": "src/main.js",
   "scripts": {
+    "start": "node src/main.js",
     "lint": "eslint src --ext .js,.jsx --report-unused-disable-directives",
     "pretty": "prettier '{src,__{tests,mocks,snapshots}__}/**/*.{js,jsx}' --write",
-    "format": "pnpm lint --fix && pnpm pretty"
+    "format": "yarn lint --fix && yarn pretty"
   },
   "prettier": {
     "singleQuote": true,

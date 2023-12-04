@@ -20,6 +20,7 @@
     "import/extensions": [2, "ignorePackages"],
     "import/no-useless-path-segments": 2,
     "import/group-exports": 2,
+    "n/no-missing-import": 0,
     "prefer-const": 2,
     "eqeqeq": 2
   }

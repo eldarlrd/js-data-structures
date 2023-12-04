@@ -14,7 +14,7 @@ Demo for Binary Search Trees:`);
 
     console.log(
       clc.cyanBright(`
-    "start {size}" - Generates a binary tree with a size between 1 and 100.`)
+    "run {size}" - Generates a binary tree with a size between 1 and 100.`)
     );
 
     console.log(
@@ -32,7 +32,7 @@ Demo for Binary Search Trees:`);
         const [command, args] = answer.split(/\s+/);
         let size, bst;
         switch (command) {
-          case 'start':
+          case 'run':
             size = ~~+args;
             if (size < 1 || size > 100) {
               console.log(clc.redBright('Incorrect size'));

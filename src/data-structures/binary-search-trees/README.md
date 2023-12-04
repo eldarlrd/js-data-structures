@@ -4,4 +4,4 @@
 > for lookup, insertion, and sorting of data items.
 
 ## Demo
-- `start {size}` - Generates a binary tree with a size between 1 and 100.
+- `run {size}` - Generates a binary tree with a size between 1 and 100.
