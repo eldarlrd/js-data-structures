@@ -17,7 +17,7 @@
     "start": "node src/main.js",
     "lint": "eslint src --ext .js,.jsx --report-unused-disable-directives",
     "pretty": "prettier '{src,__{tests,mocks,snapshots}__}/**/*.{js,jsx}' --write",
-    "format": "yarn lint --fix && yarn pretty"
+    "format": "yarn lint --fix && yarn pretty --cache --cache-location=.yarn/cache/prettier/.prettier-cache"
   },
   "prettier": {
     "singleQuote": true,
