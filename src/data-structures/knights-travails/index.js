@@ -45,9 +45,13 @@ export default function knightMoves(
     currKnight = knight.shift();
   }
 
+  const moveAmount = currKnight.path.length - 1;
+
   console.log(
     clc.greenBright(`
-=> You made it in ${currKnight.path.length - 1} moves! Here's your path:
+=> You made it in ${moveAmount} move${
+      moveAmount === 1 ? '' : 's'
+    }! Here's your path:
 `)
   );
 

@@ -1,7 +1,7 @@
 {
   "name": "js-data-structures",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "keywords": [
     "data-structures",
@@ -15,7 +15,9 @@
   "main": "src/main.js",
   "scripts": {
     "start": "node src/main.js",
-    "lint": "eslint src --ext .js,.jsx --report-unused-disable-directives",
+    "test": "jest --watchAll",
+    "cover": "jest --coverage",
+    "lint": "eslint src __tests__ --ext .js,.jsx --report-unused-disable-directives",
     "pretty": "prettier '{src,__{tests,mocks,snapshots}__}/**/*.{js,jsx}' --write",
     "format": "yarn lint --fix && yarn pretty --cache --cache-location=.yarn/cache/prettier/.prettier-cache"
   },
@@ -32,11 +34,27 @@
   "devDependencies": {
     "@babel/core": "^7.23.5",
     "@babel/eslint-parser": "^7.23.3",
+    "@babel/preset-env": "^7.23.5",
+    "babel-jest": "^29.7.0",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-jest": "^27.6.0",
     "eslint-plugin-n": "^16.3.1",
     "eslint-plugin-promise": "^6.1.1",
+    "jest": "^29.7.0",
     "prettier": "^3.1.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
   }
 }

@@ -18,6 +18,15 @@ yarn
 ```sh
 yarn format
 ```
+## Test
+### Watch
+```sh
+yarn test
+```
+### Coverage Report
+```sh
+yarn cover
+```
 ## Run
 ```sh
 yarn start
