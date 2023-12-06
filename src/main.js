@@ -120,9 +120,7 @@ const mainRun = () =>
           return mainRun();
       }
     })
-    .catch(error => {
-      console.error(clc.redBright(error));
-    });
+    .catch(error => console.error(clc.redBright(error)));
 
 notice();
 mainHelp();

@@ -117,9 +117,7 @@ Demo for Binary Search Trees:`);
             return run();
         }
       })
-      .catch(error => {
-        console.error(clc.redBright(error));
-      });
+      .catch(error => console.error(clc.redBright(error)));
 
   help();
   run();
