@@ -56,7 +56,7 @@ A solution to the Knights Travails:`);
               )
                 knightMoves(initPositions, targetPositions);
               else
-                console.log(clc.redBright('Positions must be between 0 to 7'));
+                console.log(clc.redBright('Positions must be from 0 to 7'));
             } else console.log(clc.redBright('Incorrect positions'));
             return run();
 
