@@ -1,7 +1,7 @@
 /**
  * @license GPL-3.0-only
  * JavaScript Data Structures - Manual and Explorable JavaScript Data Structures
- * Copyright (C) 2023 Eldar Pashazade <eldarlrd@pm.me>
+ * Copyright (C) 2023-2024 Eldar Pashazade <eldarlrd@pm.me>
  *
  * This file is part of JavaScript Data Structures.
  *
@@ -49,7 +49,7 @@ const conditions = () =>
 const notice = () =>
   console.log(
     clc.magentaBright(`
-  JavaScript Data Structures Copyright (C) 2023 Eldar Pashazade <eldarlrd@pm.me>
+  JavaScript Data Structures Copyright (C) 2023-2024 Eldar Pashazade <eldarlrd@pm.me>
   This program comes with ABSOLUTELY NO WARRANTY; for details type "w".
   This is free software, and you are welcome to redistribute it
   under certain conditions; type "c" for details.`)
