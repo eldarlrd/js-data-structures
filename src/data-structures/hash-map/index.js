@@ -37,11 +37,21 @@ export default class HashMap {
       bucket.push(new Node(key, value));
       this.size += 1;
 
-      if (this.size / this.buckets.length < this.loadFactor) this.resize();
+      if (this.size / this.buckets.length < this.loadFactor) this.#resize();
     }
   }
 
-  resize() {
+  get(key) {
+    const index = this.hash(key);
+    if (index < 0 || index >= this.buckets.length) return;
+
+    const bucket = this.buckets[index];
+    const currNode = bucket.find(node => node.key === key);
+
+    return currNode ? currNode.value : undefined;
+  }
+
+  #resize() {
     const newCapacity = this.buckets.length * 2;
     const newBuckets = new Array(newCapacity).fill(null).map(() => []);
 
@@ -53,15 +63,5 @@ export default class HashMap {
     });
 
     this.buckets = newBuckets;
-  }
-
-  get(key) {
-    const index = this.hash(key);
-    if (index < 0 || index >= this.buckets.length) return;
-
-    const bucket = this.buckets[index];
-    const currNode = bucket.find(node => node.key === key);
-
-    return currNode ? currNode.value : undefined;
   }
 }

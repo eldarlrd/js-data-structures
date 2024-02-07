@@ -11,7 +11,7 @@ import Node from './node.js';
 export default class BinarySearchTrees {
   constructor(arr) {
     const sortedArr = [...new Set(arr)].sort((a, b) => a - b);
-    this.root = this.buildTree(sortedArr);
+    this.root = this.#buildTree(sortedArr);
   }
 
   /**
@@ -19,14 +19,14 @@ export default class BinarySearchTrees {
    * @param {number[]} sortedArr - Passed in array to start the tree.
    * @returns {number[]} Tree root.
    */
-  buildTree(sortedArr) {
+  #buildTree(sortedArr) {
     if (sortedArr.length === 0) return null;
 
     const halfIndex = ~~(sortedArr.length / 2);
     const rootNode = new Node(
       sortedArr[halfIndex],
-      this.buildTree(sortedArr.slice(0, halfIndex)),
-      this.buildTree(sortedArr.slice(halfIndex + 1))
+      this.#buildTree(sortedArr.slice(0, halfIndex)),
+      this.#buildTree(sortedArr.slice(halfIndex + 1))
     );
     return rootNode;
   }
@@ -180,7 +180,7 @@ export default class BinarySearchTrees {
    */
   rebalance() {
     const inOrderArr = this.inOrder();
-    this.root = this.buildTree(inOrderArr);
+    this.root = this.#buildTree(inOrderArr);
   }
 
   /**
