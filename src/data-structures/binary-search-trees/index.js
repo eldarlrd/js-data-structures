@@ -15,23 +15,6 @@ export default class BinarySearchTrees {
   }
 
   /**
-   * Generates a balanced binary tree.
-   * @param {number[]} sortedArr - Passed in array to start the tree.
-   * @returns {number[]} Tree root.
-   */
-  #buildTree(sortedArr) {
-    if (sortedArr.length === 0) return null;
-
-    const halfIndex = ~~(sortedArr.length / 2);
-    const rootNode = new Node(
-      sortedArr[halfIndex],
-      this.#buildTree(sortedArr.slice(0, halfIndex)),
-      this.#buildTree(sortedArr.slice(halfIndex + 1))
-    );
-    return rootNode;
-  }
-
-  /**
    * Adds a new element to the tree.
    * @param {number} value - Passed in value to add.
    * @returns {number[]} Tree root.
@@ -203,5 +186,22 @@ export default class BinarySearchTrees {
         `${prefix}${isLeft ? '    ' : '│   '}`,
         true
       );
+  }
+
+  /**
+   * Generates a balanced binary tree.
+   * @param {number[]} sortedArr - Passed in array to start the tree.
+   * @returns {number[]} Tree root.
+   */
+  #buildTree(sortedArr) {
+    if (sortedArr.length === 0) return null;
+
+    const halfIndex = ~~(sortedArr.length / 2);
+    const rootNode = new Node(
+      sortedArr[halfIndex],
+      this.#buildTree(sortedArr.slice(0, halfIndex)),
+      this.#buildTree(sortedArr.slice(halfIndex + 1))
+    );
+    return rootNode;
   }
 }
