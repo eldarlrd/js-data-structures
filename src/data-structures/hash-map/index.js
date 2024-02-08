@@ -51,6 +51,18 @@ export default class HashMap {
     return currNode ? currNode.value : undefined;
   }
 
+  has(key) {
+    const index = this.hash(key);
+    if (index < 0 || index >= this.buckets.length) return;
+
+    const bucket = this.buckets[index];
+    return bucket.some(node => node.key === key);
+  }
+
+  length() {
+    return this.size;
+  }
+
   #resize() {
     const newCapacity = this.buckets.length * 2;
     const newBuckets = new Array(newCapacity).fill(null).map(() => []);
