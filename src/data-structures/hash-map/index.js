@@ -20,16 +20,15 @@ export default class HashMap {
     return hashCode % this.buckets.length;
   }
 
+  // Add command
+
   /**
    * Sets the key-value pair to the map.
    * @param {string} key - Passed in key.
    * @param {*} value - Value assigned to this key.
    */
   set(key, value) {
-    const index = this.hash(key);
-    if (index < 0 || index >= this.buckets.length) return;
-
-    const bucket = this.buckets[index];
+    const bucket = this.#findBucket(key);
     const currNode = bucket.find(node => node.key === key);
 
     if (currNode) currNode.value = value;
@@ -41,26 +40,68 @@ export default class HashMap {
     }
   }
 
-  get(key) {
-    const index = this.hash(key);
-    if (index < 0 || index >= this.buckets.length) return;
+  // Delete commands
 
-    const bucket = this.buckets[index];
+  remove(key) {
+    const bucket = this.#findBucket(key);
+    const indexToRemove = bucket.findIndex(node => node.key === key);
+
+    if (indexToRemove !== -1) {
+      bucket.splice(indexToRemove, 1);
+      this.size -= 1;
+      return true;
+    }
+    return false;
+  }
+
+  clear() {
+    this.buckets = new Array(this.buckets.length).fill(null).map(() => []);
+    this.size = 0;
+  }
+
+  // View commands
+
+  get(key) {
+    const bucket = this.#findBucket(key);
     const currNode = bucket.find(node => node.key === key);
 
     return currNode ? currNode.value : undefined;
   }
 
   has(key) {
-    const index = this.hash(key);
-    if (index < 0 || index >= this.buckets.length) return;
-
-    const bucket = this.buckets[index];
+    const bucket = this.#findBucket(key);
     return bucket.some(node => node.key === key);
   }
 
   length() {
     return this.size;
+  }
+
+  keys() {
+    return this.entries().map(entry => entry[0]);
+  }
+
+  values() {
+    return this.entries().map(entry => entry[1]);
+  }
+
+  entries() {
+    const entryArr = [];
+    this.buckets.forEach(bucket => {
+      bucket.forEach(node => {
+        entryArr.push([node.key, node.value]);
+      });
+    });
+    return entryArr;
+  }
+
+  // Utility methods
+
+  #findBucket(key) {
+    const index = this.hash(key);
+    if (index < 0 || index >= this.buckets.length) return;
+
+    return this.buckets[index];
   }
 
   #resize() {
