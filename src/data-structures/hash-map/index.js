@@ -7,19 +7,6 @@ export default class HashMap {
     this.size = 0;
   }
 
-  /**
-   * Produces a hash code.
-   * @param {string} key - Passed in key for the code.
-   * @returns {number} Hash code.
-   */
-  hash(key) {
-    let hashCode = 0;
-    const primeNumber = 31;
-    for (let i = 0; i < key.length; i++)
-      hashCode = primeNumber * hashCode + key.charCodeAt(i);
-    return hashCode % this.buckets.length;
-  }
-
   // Add command
 
   /**
@@ -97,8 +84,22 @@ export default class HashMap {
 
   // Utility methods
 
+  /**
+   * Produces a hash code.
+   * @param {string} key - Passed in key for the code.
+   * @returns {number} Hash code.
+   */
+  #hash(key) {
+    let hashCode = 0;
+    const primeNumber = 31;
+    for (let i = 0; i < key.length; i++)
+      hashCode =
+        (primeNumber * hashCode + key.charCodeAt(i)) % this.buckets.length;
+    return hashCode;
+  }
+
   #findBucket(key) {
-    const index = this.hash(key);
+    const index = this.#hash(key);
     if (index < 0 || index >= this.buckets.length) return;
 
     return this.buckets[index];
@@ -110,7 +111,7 @@ export default class HashMap {
 
     this.buckets.forEach(bucket => {
       for (const node of bucket) {
-        const newIndex = this.hash(node.key);
+        const newIndex = this.#hash(node.key);
         newBuckets[newIndex].push(node);
       }
     });
