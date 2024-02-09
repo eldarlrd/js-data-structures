@@ -9,3 +9,13 @@ export default class Node {
     this.value = value;
   }
 }
+
+/**
+ * Hash Set node that only holds keys.
+ * @param {string} key - Passed in key.
+ */
+export class SetNode {
+  constructor(key) {
+    this.key = key;
+  }
+}
