@@ -24,14 +24,15 @@ export default class HashMap {
    */
   set(key, value) {
     const bucket = this.#findBucket(key);
-    const currNode = bucket.find(node => node.key === key);
+    if (bucket) {
+      const currNode = bucket.find(node => node.key === key);
+      if (currNode) currNode.value = value;
+      else {
+        bucket.push(new Node(key, value));
+        this.size += 1;
 
-    if (currNode) currNode.value = value;
-    else {
-      bucket.push(new Node(key, value));
-      this.size += 1;
-
-      if (this.size / this.buckets.length < this.loadFactor) this.#resize();
+        if (this.size / this.buckets.length < this.loadFactor) this.#resize();
+      }
     }
   }
 
@@ -44,18 +45,19 @@ export default class HashMap {
    */
   remove(key) {
     const bucket = this.#findBucket(key);
-    const indexToRemove = bucket.findIndex(node => node.key === key);
-
-    if (indexToRemove !== -1) {
-      bucket.splice(indexToRemove, 1);
-      this.size -= 1;
-      return true;
+    if (bucket) {
+      const indexToRemove = bucket.findIndex(node => node.key === key);
+      if (indexToRemove !== -1) {
+        bucket.splice(indexToRemove, 1);
+        this.size -= 1;
+        return true;
+      }
+      return false;
     }
-    return false;
   }
 
   /**
-   * Removes all entries from the map.
+   * Clears all entries from the map.
    */
   clear() {
     this.buckets = new Array(this.buckets.length).fill(null).map(() => []);
@@ -65,54 +67,50 @@ export default class HashMap {
   // View commands
 
   /**
-   * Retrieves the value associated with the key.
-   * @param {string} key - Passed in key to get.
-   * @returns {string} Found value.
-   */
-  get(key) {
-    const bucket = this.#findBucket(key);
-    const currNode = bucket.find(node => node.key === key);
-
-    return currNode ? currNode.value : 'not found';
-  }
-
-  /**
-   * Checks if the key exists.
    * @param {string} key - Passed in key to check.
-   * @returns {boolean} Result of the check.
+   * @returns {boolean} true if the key is in the map, false if not.
    */
   has(key) {
     const bucket = this.#findBucket(key);
-    return bucket.some(node => node.key === key);
+    return bucket ? bucket.some(node => node.key === key) : false;
   }
 
   /**
-   * Returns the size of the map.
-   * @returns {number} Size of the map.
+   * @param {string} key - Passed in key to get.
+   * @returns {string} Value associated with the key.
+   */
+  get(key) {
+    const bucket = this.#findBucket(key);
+    if (bucket) {
+      const currNode = bucket.find(node => node.key === key);
+      return currNode ? currNode.value : 'not found';
+    }
+    return 'not found';
+  }
+
+  /**
+   * @returns {number} Length of the map.
    */
   length() {
     return this.size;
   }
 
   /**
-   * Returns an array of map keys.
-   * @returns {string[]} Map keys.
+   * @returns {string[]} An array of map keys.
    */
   keys() {
     return this.entries().map(entry => entry[0]);
   }
 
   /**
-   * Returns an array of map values.
-   * @returns {string[]} Map values.
+   * @returns {string[]} An array of map values.
    */
   values() {
     return this.entries().map(entry => entry[1]);
   }
 
   /**
-   * Returns an array of the key-value pairs.
-   * @returns {string[][]} Map pairs.
+   * @returns {string[][]} An array of key-value pairs.
    */
   entries() {
     const entryArr = [];
@@ -134,6 +132,7 @@ export default class HashMap {
   #hash(key) {
     let hashCode = 0;
     const primeNumber = 31;
+    if (!key) return -1;
     for (let i = 0; i < key.length; i++)
       hashCode =
         (primeNumber * hashCode + key.charCodeAt(i)) % this.buckets.length;
@@ -143,17 +142,16 @@ export default class HashMap {
   /**
    * Finds the bucket with the key.
    * @param {string} key - Passed in key to find.
-   * @returns {{ key: string, value: string }[]} A bucket with the pair.
+   * @returns {({ key: string, value: string }[] | null)} A bucket with the pair.
    */
   #findBucket(key) {
     const index = this.#hash(key);
-    if (index < 0 || index >= this.buckets.length) return;
-
+    if (index < 0 || index >= this.buckets.length) return null;
     return this.buckets[index];
   }
 
   /**
-   * Resizes the map to accomodate the for the load factor.
+   * Resizes the map to accomodate for the load factor.
    */
   #resize() {
     const newCapacity = this.buckets.length * 2;

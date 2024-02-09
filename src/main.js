@@ -24,6 +24,7 @@ import * as readline from 'node:readline/promises';
 import clc from 'cli-color';
 
 import binarySearchTreesCli from './data-structures/binary-search-trees/cli.js';
+import hashMapCli from './data-structures/hash-map/cli.js';
 import knightsTravailsCli from './data-structures/knights-travails/cli.js';
 import linkedListCli from './data-structures/linked-list/cli.js';
 
@@ -63,7 +64,8 @@ Below is a list of manual and explorable data structures:`);
     clc.cyanBright(`
   1. Linked List - A linear collection of data elements.
   2. Binary Search Trees - Traversing a tree of nodes.
-  3. Knights Travails - Find the shortest path for the knight.`)
+  3. Knights Travails - Find the shortest path for the knight.
+  4. Hash Map - An associative array of keys and values.`)
   );
 
   console.log(
@@ -94,6 +96,11 @@ const mainRun = () =>
           );
         case '3':
           return knightsTravailsCli(
+            e => rl.question(e),
+            () => rl.close()
+          );
+        case '4':
+          return hashMapCli(
             e => rl.question(e),
             () => rl.close()
           );
