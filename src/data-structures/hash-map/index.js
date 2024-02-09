@@ -21,6 +21,7 @@ export default class HashMap {
    * Sets the key-value pair to the map.
    * @param {string} key - Passed in key.
    * @param {string} value - Value assigned to this key.
+   * @returns {string} String on set attempt.
    */
   set(key, value) {
     const bucket = this.#findBucket(key);
@@ -32,8 +33,10 @@ export default class HashMap {
         this.size += 1;
 
         if (this.size / this.buckets.length < this.loadFactor) this.#resize();
+        return 'Pair added to the map';
       }
     }
+    return 'Incorrect key-value pair';
   }
 
   // Delete commands
@@ -54,14 +57,17 @@ export default class HashMap {
       }
       return false;
     }
+    return false;
   }
 
   /**
    * Clears all entries from the map.
+   * @returns {string} String on successful clear.
    */
   clear() {
     this.buckets = new Array(this.buckets.length).fill(null).map(() => []);
     this.size = 0;
+    return 'Map has been cleared';
   }
 
   // View commands

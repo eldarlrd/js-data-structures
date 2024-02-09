@@ -44,23 +44,26 @@ Available commands for Hash Map:`);
         const [command, ...args] = answer.split(/\s+/);
         switch (command) {
           // Add command
-          case 'set': // FIX
+          case 'set':
             console.log(clc.greenBright(hashMap.set(args[0], args[1])));
             return run();
 
           // Delete commands
-          case 'remove': // FIX
-            console.log(clc.greenBright(hashMap.remove(args[0])));
+          case 'remove':
+            console.log(
+              clc.greenBright('Is pair removed?'),
+              hashMap.remove(args[0])
+            );
             return run();
           case 'clear':
             console.log(clc.greenBright(hashMap.clear()));
             return run();
 
           // View commands
-          case 'has': // FIX
+          case 'has':
             console.log(clc.greenBright(hashMap.has(args[0])));
             return run();
-          case 'get': // FIX
+          case 'get':
             console.log(
               clc.greenBright(
                 `The value of the key ${args[0]} is`,
