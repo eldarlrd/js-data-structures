@@ -1,5 +1,13 @@
 import Node from './node.js';
 
+/**
+ * Hash Maps are data structures that
+ * allow storing and retrieving key-value pairs.
+ *
+ * A hash function is used to map keys to an array,
+ * where their values are stored. The function serves to
+ * generate a hash code which determines the value index.
+ */
 export default class HashMap {
   constructor(initCapacity = 16, loadFactor = 0.75) {
     this.buckets = new Array(initCapacity).fill(null).map(() => []);
@@ -12,7 +20,7 @@ export default class HashMap {
   /**
    * Sets the key-value pair to the map.
    * @param {string} key - Passed in key.
-   * @param {*} value - Value assigned to this key.
+   * @param {string} value - Value assigned to this key.
    */
   set(key, value) {
     const bucket = this.#findBucket(key);
@@ -29,6 +37,11 @@ export default class HashMap {
 
   // Delete commands
 
+  /**
+   * Removes the key-value pair from the map.
+   * @param {string} key - Key of the pair to remove.
+   * @returns {boolean} Status of removal.
+   */
   remove(key) {
     const bucket = this.#findBucket(key);
     const indexToRemove = bucket.findIndex(node => node.key === key);
@@ -41,6 +54,9 @@ export default class HashMap {
     return false;
   }
 
+  /**
+   * Removes all entries from the map.
+   */
   clear() {
     this.buckets = new Array(this.buckets.length).fill(null).map(() => []);
     this.size = 0;
@@ -48,30 +64,56 @@ export default class HashMap {
 
   // View commands
 
+  /**
+   * Retrieves the value associated with the key.
+   * @param {string} key - Passed in key to get.
+   * @returns {string} Found value.
+   */
   get(key) {
     const bucket = this.#findBucket(key);
     const currNode = bucket.find(node => node.key === key);
 
-    return currNode ? currNode.value : undefined;
+    return currNode ? currNode.value : 'not found';
   }
 
+  /**
+   * Checks if the key exists.
+   * @param {string} key - Passed in key to check.
+   * @returns {boolean} Result of the check.
+   */
   has(key) {
     const bucket = this.#findBucket(key);
     return bucket.some(node => node.key === key);
   }
 
+  /**
+   * Returns the size of the map.
+   * @returns {number} Size of the map.
+   */
   length() {
     return this.size;
   }
 
+  /**
+   * Returns an array of map keys.
+   * @returns {string[]} Map keys.
+   */
   keys() {
     return this.entries().map(entry => entry[0]);
   }
 
+  /**
+   * Returns an array of map values.
+   * @returns {string[]} Map values.
+   */
   values() {
     return this.entries().map(entry => entry[1]);
   }
 
+  /**
+   * Returns an array of the key-value pairs.
+   * @returns {string[][]} Map pairs.
+   */
   entries() {
     const entryArr = [];
     this.buckets.forEach(bucket => {
@@ -86,7 +128,7 @@ export default class HashMap {
 
   /**
    * Produces a hash code.
-   * @param {string} key - Passed in key for the code.
+   * @param {string} key - Passed in key to hash.
    * @returns {number} Hash code.
    */
   #hash(key) {
@@ -98,6 +140,11 @@ export default class HashMap {
     return hashCode;
   }
 
+  /**
+   * Finds the bucket with the key.
+   * @param {string} key - Passed in key to find.
+   * @returns {{ key: string, value: string }[]} A bucket with the pair.
+   */
   #findBucket(key) {
     const index = this.#hash(key);
     if (index < 0 || index >= this.buckets.length) return;
@@ -105,6 +152,9 @@ export default class HashMap {
     return this.buckets[index];
   }
 
+  /**
+   * Resizes the map to accomodate the for the load factor.
+   */
   #resize() {
     const newCapacity = this.buckets.length * 2;
     const newBuckets = new Array(newCapacity).fill(null).map(() => []);
