@@ -1,13 +1,12 @@
 {
   "name": "js-data-structures",
   "private": true,
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
   "keywords": [
     "data-structures",
     "javascript"
   ],
-  "packageManager": "yarn@4.1.0",
   "description": "Manual and Explorable JavaScript Data Structures",
   "repository": "github:eldarlrd/js-data-structures",
   "author": "Eldar Pashazade <eldarlrd@pm.me> (https://eldarlrd.github.io)",
@@ -17,33 +16,39 @@
     "start": "node src/main.js",
     "test": "jest --watchAll",
     "cover": "jest --coverage",
-    "lint": "eslint src __tests__ --ext .js,.jsx --report-unused-disable-directives",
+    "lint": "eslint src __tests__ --flag unstable_ts_config",
     "pretty": "prettier '{src,__{tests,mocks,snapshots}__}/**/*.{js,jsx}' --write",
-    "format": "yarn lint --fix && yarn pretty --cache --cache-location=.yarn/cache/prettier/.prettier-cache"
+    "format": "npm run lint -- --fix && npm run pretty"
   },
   "prettier": {
     "singleQuote": true,
     "jsxSingleQuote": true,
     "bracketSameLine": true,
     "trailingComma": "none",
-    "arrowParens": "avoid"
+    "arrowParens": "avoid",
+    "experimentalTernaries": true
   },
   "dependencies": {
-    "cli-color": "^2.0.3"
+    "cli-color": "^2.0.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.9",
-    "@babel/eslint-parser": "^7.23.10",
-    "@babel/preset-env": "^7.23.9",
+    "@babel/core": "^7.25.7",
+    "@babel/eslint-parser": "^7.25.7",
+    "@babel/preset-env": "^7.25.7",
+    "@eslint/js": "^9.12.0",
     "babel-jest": "^29.7.0",
-    "eslint": "^8.56.0",
+    "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jest": "^27.6.3",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jest": "^28.8.3",
+    "eslint-plugin-n": "^17.11.0",
+    "eslint-plugin-promise": "^7.1.0",
+    "globals": "^15.11.0",
     "jest": "^29.7.0",
-    "prettier": "^3.2.5"
+    "prettier": "^3.3.3"
+  },
+  "engines": {
+    "node": ">=17.0.0"
   },
   "babel": {
     "presets": [
@@ -56,5 +61,6 @@
         }
       ]
     ]
-  }
+  },
+  "packageManager": "npm run@4.5. --0"
 }

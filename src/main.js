@@ -23,10 +23,10 @@ import * as readline from 'node:readline/promises';
 
 import clc from 'cli-color';
 
-import binarySearchTreesCli from './data-structures/binary-search-trees/cli.js';
-import hashMapCli from './data-structures/hash-map/cli.js';
-import knightsTravailsCli from './data-structures/knights-travails/cli.js';
-import linkedListCli from './data-structures/linked-list/cli.js';
+import binarySearchTreesCli from './dataStructures/binarySearchTrees/cli.js';
+import hashMapCli from './dataStructures/hashMap/cli.js';
+import knightsTravailsCli from './dataStructures/knightsTravails/cli.js';
+import linkedListCli from './dataStructures/linkedList/cli.js';
 
 const warranty = () =>
   console.log(
