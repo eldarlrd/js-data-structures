@@ -140,8 +140,7 @@ export default class HashMap {
     const primeNumber = 31;
     if (!key) return -1;
     for (let i = 0; i < key.length; i++)
-      hashCode =
-        (primeNumber * hashCode + key.charCodeAt(i)) % bucketLength;
+      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % bucketLength;
     return hashCode;
   }
 
@@ -284,8 +283,7 @@ export class HashSet {
     const primeNumber = 31;
     if (!key) return -1;
     for (let i = 0; i < key.length; i++)
-      hashCode =
-        (primeNumber * hashCode + key.charCodeAt(i)) % bucketLength;
+      hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % bucketLength;
     return hashCode;
   }
 
