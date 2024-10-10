@@ -32,7 +32,7 @@ export default class HashMap {
         bucket.push(new Node(key, value));
         this.size += 1;
 
-        if (this.size / this.buckets.length < this.loadFactor) this.#resize();
+        if (this.size / this.buckets.length > this.loadFactor) this.#resize();
         return 'Pair added to the map';
       }
     }
@@ -135,13 +135,13 @@ export default class HashMap {
    * @param {string} key - Passed in key to hash.
    * @returns {number} Hash code.
    */
-  #hash(key) {
+  #hash(key, bucketLength = this.buckets.length) {
     let hashCode = 0;
     const primeNumber = 31;
     if (!key) return -1;
     for (let i = 0; i < key.length; i++)
       hashCode =
-        (primeNumber * hashCode + key.charCodeAt(i)) % this.buckets.length;
+        (primeNumber * hashCode + key.charCodeAt(i)) % bucketLength;
     return hashCode;
   }
 
@@ -165,7 +165,7 @@ export default class HashMap {
 
     this.buckets.forEach(bucket => {
       for (const node of bucket) {
-        const newIndex = this.#hash(node.key);
+        const newIndex = this.#hash(node.key, newBuckets.length);
         newBuckets[newIndex].push(node);
       }
     });
@@ -203,7 +203,7 @@ export class HashSet {
         bucket.push(new SetNode(key));
         this.size += 1;
 
-        if (this.size / this.buckets.length < this.loadFactor) this.#resize();
+        if (this.size / this.buckets.length > this.loadFactor) this.#resize();
         return 'Key added to the set';
       }
     }
@@ -279,13 +279,13 @@ export class HashSet {
    * @param {string} key - Passed in key to hash.
    * @returns {number} Hash code.
    */
-  #hash(key) {
+  #hash(key, bucketLength = this.buckets.length) {
     let hashCode = 0;
     const primeNumber = 31;
     if (!key) return -1;
     for (let i = 0; i < key.length; i++)
       hashCode =
-        (primeNumber * hashCode + key.charCodeAt(i)) % this.buckets.length;
+        (primeNumber * hashCode + key.charCodeAt(i)) % bucketLength;
     return hashCode;
   }
 
@@ -309,7 +309,7 @@ export class HashSet {
 
     this.buckets.forEach(bucket => {
       for (const node of bucket) {
-        const newIndex = this.#hash(node.key);
+        const newIndex = this.#hash(node.key, newBuckets.length);
         newBuckets[newIndex].push(node);
       }
     });
