@@ -1,21 +1,21 @@
 /**
  * @license GPL-3.0-only
- * JavaScript Data Structures - Manual and Explorable JavaScript Data Structures
+ * JS Data Structures - Manual and Explorable JS Data Structures
  * Copyright (C) 2023-2024 Eldar Pashazade <eldarlrd@pm.me>
  *
- * This file is part of JavaScript Data Structures.
+ * This file is part of JS Data Structures.
  *
- * JavaScript Data Structures is free software: you can redistribute it and/or modify
+ * JS Data Structures is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, version 3.
  *
- * JavaScript Data Structures is distributed in the hope that it will be useful,
+ * JS Data Structures is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with JavaScript Data Structures. If not, see <https://www.gnu.org/licenses/>.
+ * along with JS Data Structures. If not, see <https://www.gnu.org/licenses/>.
  */
 
 import { stdin as input, stdout as output } from 'node:process';
@@ -31,7 +31,7 @@ import linkedListCli from './dataStructures/linkedList/cli.js';
 const warranty = () =>
   console.log(
     clc.magentaBright(`
-  JavaScript Data Structures is distributed in the hope that it will be useful,
+  JS Data Structures is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
   GNU General Public License for more details.
@@ -41,7 +41,7 @@ const warranty = () =>
 const conditions = () =>
   console.log(
     clc.magentaBright(`
-  JavaScript Data Structures is free software: you can redistribute it and/or modify
+  JS Data Structures is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, version 3.
 `)
@@ -50,7 +50,7 @@ const conditions = () =>
 const notice = () =>
   console.log(
     clc.magentaBright(`
-  JavaScript Data Structures Copyright (C) 2023-2024 Eldar Pashazade <eldarlrd@pm.me>
+  JS Data Structures Copyright (C) 2023-2024 Eldar Pashazade <eldarlrd@pm.me>
   This program comes with ABSOLUTELY NO WARRANTY; for details type "w".
   This is free software, and you are welcome to redistribute it
   under certain conditions; type "c" for details.`)
