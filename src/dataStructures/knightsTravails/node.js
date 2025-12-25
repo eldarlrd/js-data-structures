@@ -13,5 +13,6 @@ export default function Node(position, path) {
   ) {
     return null;
   }
+
   return { position, path };
 }

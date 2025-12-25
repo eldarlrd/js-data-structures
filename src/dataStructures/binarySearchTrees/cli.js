@@ -31,11 +31,13 @@ Demo for Binary Search Trees:`);
       .then(answer => {
         const [command, args] = answer.split(/\s+/);
         let size, bst;
+
         switch (command) {
           case 'run':
             size = ~~+args;
             if (size < 1 || size > 100) {
               console.log(clc.redBright('Incorrect size'));
+
               return run();
             }
             bst = new BinarySearchTrees(getRandomArr(size));
@@ -100,20 +102,24 @@ Demo for Binary Search Trees:`);
             console.log();
             bst.prettyPrint();
             console.log();
+
             return run();
 
           // Controls
           case 'b':
             mainHelp();
+
             return mainRun();
           case 'h':
             help();
+
             return run();
           case 'q':
             return quit();
 
           default:
             console.log(clc.redBright('Unknown command'));
+
             return run();
         }
       })

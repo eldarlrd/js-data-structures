@@ -15,12 +15,12 @@
 npm i
 ```
 ## Develop
-### Format Code (ESLint + Prettier)
+### Fix Code (ESLint + Prettier)
 ```sh
-npm run format
+npm run fix
 ```
 ## Test
-### Watch
+### Run Watch
 ```sh
 npm test
 ```

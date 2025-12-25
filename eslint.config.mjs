@@ -21,7 +21,7 @@ export default [
       globals: {
         ...globals.serviceworker,
         ...globals.browser,
-        ...globals.es2024
+        ...globals.es2026
       },
       parser: babelParser,
       parserOptions: {
@@ -32,17 +32,23 @@ export default [
       }
     },
     rules: {
-      'import/order': [2, { 'newlines-between': 'always', alphabetize: { order: 'asc' } }],
-      'import/consistent-type-specifier-style': [2, 'prefer-inline'],
-      'import/extensions': [2, 'ignorePackages'],
-      'import/no-named-as-default-member': 0,
-      'import/no-useless-path-segments': 2,
-      'import/no-named-as-default': 0,
-      'import/group-exports': 2,
+      'import/order': [
+        1,
+        { 'newlines-between': 'always', alphabetize: { order: 'asc' } }
+      ],
+      'import/consistent-type-specifier-style': [1, 'prefer-inline'],
+      'import/extensions': [1, 'ignorePackages'],
+      'import/no-useless-path-segments': 1,
+      'import/group-exports': 1,
       'n/no-unsupported-features/node-builtins': 0,
-      'n/no-missing-import': 0,
-      'prefer-const': 2,
+      'n/no-missing-import': 2,
+      'prefer-const': 1,
+      'padding-line-between-statements': [1,
+        { blankLine: 'always', prev: '*', next: 'return' },
+        { blankLine: 'always', prev: ['directive', 'const', 'let', 'var'], next: '*' },
+        { blankLine: 'any', prev: ['const', 'let', 'var'], next: ['const', 'let', 'var'] }
+      ],
       eqeqeq: 2
     }
   }
-]
+];

@@ -39,6 +39,7 @@ export default function knightMoves(
 
     legalMoves.forEach(legalMove => {
       const nextKnight = Node(legalMove, currKnight.path.concat([legalMove]));
+
       if (nextKnight) knight.push(nextKnight);
     });
 

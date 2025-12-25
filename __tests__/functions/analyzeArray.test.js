@@ -9,6 +9,7 @@ describe('array analyzer', () => {
       max: 8,
       length: 6
     };
+
     expect(analyzeArray(input)).toStrictEqual(output);
   });
 });

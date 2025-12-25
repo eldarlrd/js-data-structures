@@ -25,17 +25,21 @@ export default class HashMap {
    */
   set(key, value) {
     const bucket = this.#findBucket(key);
+
     if (bucket) {
       const currNode = bucket.find(node => node.key === key);
+
       if (currNode) currNode.value = value;
       else {
         bucket.push(new Node(key, value));
         this.size += 1;
 
         if (this.size / this.buckets.length > this.loadFactor) this.#resize();
+
         return 'Pair added to the map';
       }
     }
+
     return 'Incorrect key-value pair';
   }
 
@@ -48,15 +52,20 @@ export default class HashMap {
    */
   remove(key) {
     const bucket = this.#findBucket(key);
+
     if (bucket) {
       const index = bucket.findIndex(node => node.key === key);
+
       if (index !== -1) {
         bucket.splice(index, 1);
         this.size -= 1;
+
         return true;
       }
+
       return false;
     }
+
     return false;
   }
 
@@ -67,6 +76,7 @@ export default class HashMap {
   clear() {
     this.buckets = new Array(this.buckets.length).fill(null).map(() => []);
     this.size = 0;
+
     return 'Map has been cleared';
   }
 
@@ -78,6 +88,7 @@ export default class HashMap {
    */
   has(key) {
     const bucket = this.#findBucket(key);
+
     return bucket ? bucket.some(node => node.key === key) : false;
   }
 
@@ -87,10 +98,13 @@ export default class HashMap {
    */
   get(key) {
     const bucket = this.#findBucket(key);
+
     if (bucket) {
       const currNode = bucket.find(node => node.key === key);
+
       return currNode ? currNode.value : 'not found';
     }
+
     return 'not found';
   }
 
@@ -120,11 +134,13 @@ export default class HashMap {
    */
   entries() {
     const entryArr = [];
+
     this.buckets.forEach(bucket => {
       bucket.forEach(node => {
         entryArr.push([node.key, node.value]);
       });
     });
+
     return entryArr;
   }
 
@@ -138,9 +154,11 @@ export default class HashMap {
   #hash(key, bucketLength = this.buckets.length) {
     let hashCode = 0;
     const primeNumber = 31;
+
     if (!key) return -1;
     for (let i = 0; i < key.length; i++)
       hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % bucketLength;
+
     return hashCode;
   }
 
@@ -151,7 +169,9 @@ export default class HashMap {
    */
   #findBucket(key) {
     const index = this.#hash(key);
+
     if (index < 0 || index >= this.buckets.length) return null;
+
     return this.buckets[index];
   }
 
@@ -165,6 +185,7 @@ export default class HashMap {
     this.buckets.forEach(bucket => {
       for (const node of bucket) {
         const newIndex = this.#hash(node.key, newBuckets.length);
+
         newBuckets[newIndex].push(node);
       }
     });
@@ -196,16 +217,20 @@ export class HashSet {
    */
   add(key) {
     const bucket = this.#findBucket(key);
+
     if (bucket) {
       const currNode = bucket.some(node => node.key === key);
+
       if (!currNode) {
         bucket.push(new SetNode(key));
         this.size += 1;
 
         if (this.size / this.buckets.length > this.loadFactor) this.#resize();
+
         return 'Key added to the set';
       }
     }
+
     return 'Incorrect key';
   }
 
@@ -218,15 +243,20 @@ export class HashSet {
    */
   remove(key) {
     const bucket = this.#findBucket(key);
+
     if (bucket) {
       const index = bucket.findIndex(node => node.key === key);
+
       if (index !== -1) {
         bucket.splice(index, 1);
         this.size -= 1;
+
         return true;
       }
+
       return false;
     }
+
     return false;
   }
 
@@ -237,6 +267,7 @@ export class HashSet {
   clear() {
     this.buckets = new Array(this.buckets.length).fill(null).map(() => []);
     this.size = 0;
+
     return 'Set has been cleared';
   }
 
@@ -248,6 +279,7 @@ export class HashSet {
    */
   has(key) {
     const bucket = this.#findBucket(key);
+
     return bucket ? bucket.some(node => node.key === key) : false;
   }
 
@@ -263,11 +295,13 @@ export class HashSet {
    */
   keys() {
     const keyArr = [];
+
     this.buckets.forEach(bucket => {
       bucket.forEach(node => {
         keyArr.push(node.key);
       });
     });
+
     return keyArr;
   }
 
@@ -281,9 +315,11 @@ export class HashSet {
   #hash(key, bucketLength = this.buckets.length) {
     let hashCode = 0;
     const primeNumber = 31;
+
     if (!key) return -1;
     for (let i = 0; i < key.length; i++)
       hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % bucketLength;
+
     return hashCode;
   }
 
@@ -294,7 +330,9 @@ export class HashSet {
    */
   #findBucket(key) {
     const index = this.#hash(key);
+
     if (index < 0 || index >= this.buckets.length) return null;
+
     return this.buckets[index];
   }
 
@@ -308,6 +346,7 @@ export class HashSet {
     this.buckets.forEach(bucket => {
       for (const node of bucket) {
         const newIndex = this.#hash(node.key, newBuckets.length);
+
         newBuckets[newIndex].push(node);
       }
     });

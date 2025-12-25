@@ -46,32 +46,40 @@ Available commands for Linked List:`);
     question('Command: ')
       .then(answer => {
         const [command, ...args] = answer.split(/\s+/);
+
         switch (command) {
           // Add commands
           case 'append':
             console.log(clc.greenBright(linkedList.append(args[0])));
+
             return run();
           case 'prepend':
             console.log(clc.greenBright(linkedList.prepend(args[0])));
+
             return run();
           case 'insert':
             console.log(clc.greenBright(linkedList.insert(args[0], args[1])));
+
             return run();
 
           // Delete commands
           case 'remove':
             console.log(clc.greenBright(linkedList.remove(args[0])));
+
             return run();
           case 'pop':
             console.log(clc.greenBright(linkedList.pop()));
+
             return run();
           case 'clear':
             console.log(clc.greenBright(linkedList.clear()));
+
             return run();
 
           // View commands
           case 'has':
             console.log(clc.greenBright(linkedList.has(args[0])));
+
             return run();
           case 'find':
             console.log(
@@ -80,6 +88,7 @@ Available commands for Linked List:`);
                 linkedList.find(args[0])
               )
             );
+
             return run();
           case 'at':
             console.log(
@@ -88,6 +97,7 @@ Available commands for Linked List:`);
                 linkedList.at(args[0])
               )
             );
+
             return run();
           case 'head':
             console.log(
@@ -96,6 +106,7 @@ Available commands for Linked List:`);
                 linkedList.head()
               )
             );
+
             return run();
           case 'tail':
             console.log(
@@ -104,28 +115,34 @@ Available commands for Linked List:`);
                 linkedList.tail()
               )
             );
+
             return run();
           case 'size':
             console.log(
               clc.greenBright('The size of the list is', linkedList.size())
             );
+
             return run();
           case 'show':
             console.log(clc.greenBright(linkedList.show()));
+
             return run();
 
           // Controls
           case 'b':
             mainHelp();
+
             return mainRun();
           case 'h':
             help();
+
             return run();
           case 'q':
             return quit();
 
           default:
             console.log(clc.redBright('Unknown command'));
+
             return run();
         }
       })

@@ -26,8 +26,10 @@ export default class LinkedList {
     if (this.listHead === null) return this.prepend(value);
     else {
       let temp = this.listHead;
+
       while (temp.nextNode !== null) temp = temp.nextNode;
       temp.nextNode = new Node(value);
+
       return 'Node added to the end';
     }
   }
@@ -39,9 +41,11 @@ export default class LinkedList {
    */
   prepend(value) {
     let temp = null;
+
     if (this.listHead !== null) temp = this.listHead;
     this.listHead = new Node(value);
     this.listHead.nextNode = temp;
+
     return 'Node added to the start';
   }
 
@@ -65,6 +69,7 @@ export default class LinkedList {
       }
 
       const temp = new Node(value);
+
       if (prev === null) {
         if (index <= 0) return this.prepend(value);
         else return this.append(value);
@@ -72,6 +77,7 @@ export default class LinkedList {
 
       prev.nextNode = temp;
       temp.nextNode = curr;
+
       return `Node added at the index ${index}`;
     }
   }
@@ -97,6 +103,7 @@ export default class LinkedList {
 
     if (prev === null || curr === null) return this.pop();
     prev.nextNode = curr.nextNode;
+
     return 'Node removed';
   }
 
@@ -116,6 +123,7 @@ export default class LinkedList {
 
     if (prev === null) return this.clear();
     prev.nextNode = null;
+
     return 'Last node removed';
   }
 
@@ -125,6 +133,7 @@ export default class LinkedList {
    */
   clear() {
     this.listHead = null;
+
     return 'List has been cleared';
   }
 
@@ -177,6 +186,7 @@ export default class LinkedList {
     }
 
     if (currIndex === null) return 'not found';
+
     return currIndex.value;
   }
 
@@ -185,6 +195,7 @@ export default class LinkedList {
    */
   head() {
     if (this.listHead === null) return 'empty';
+
     return this.listHead.value;
   }
 
@@ -194,7 +205,9 @@ export default class LinkedList {
   tail() {
     if (this.listHead === null) return 'empty';
     let tail = this.listHead;
+
     while (tail.nextNode !== null) tail = tail.nextNode;
+
     return tail.value;
   }
 

@@ -43,6 +43,7 @@ A solution to the Knights Travails:`);
         const isValid = position => ~~+position >= 0 && ~~+position <= 7;
         let initPositions;
         let targetPositions;
+
         switch (command) {
           case 'play':
             if (args[0] && args[1]) {
@@ -57,20 +58,24 @@ A solution to the Knights Travails:`);
                 knightMoves(initPositions, targetPositions);
               else console.log(clc.redBright('Positions must be from 0 to 7'));
             } else console.log(clc.redBright('Incorrect positions'));
+
             return run();
 
           // Controls
           case 'b':
             mainHelp();
+
             return mainRun();
           case 'h':
             help();
+
             return run();
           case 'q':
             return quit();
 
           default:
             console.log(clc.redBright('Unknown command'));
+
             return run();
         }
       })

@@ -42,10 +42,12 @@ Available commands for Hash Map:`);
     question('Command: ')
       .then(answer => {
         const [command, ...args] = answer.split(/\s+/);
+
         switch (command) {
           // Add command
           case 'set':
             console.log(clc.greenBright(hashMap.set(args[0], args[1])));
+
             return run();
 
           // Delete commands
@@ -54,14 +56,17 @@ Available commands for Hash Map:`);
               clc.greenBright('Is pair removed?'),
               hashMap.remove(args[0])
             );
+
             return run();
           case 'clear':
             console.log(clc.greenBright(hashMap.clear()));
+
             return run();
 
           // View commands
           case 'has':
             console.log(clc.greenBright(hashMap.has(args[0])));
+
             return run();
           case 'get':
             console.log(
@@ -70,34 +75,42 @@ Available commands for Hash Map:`);
                 hashMap.get(args[0])
               )
             );
+
             return run();
           case 'length':
             console.log(
               clc.greenBright('The length of the map is', hashMap.length())
             );
+
             return run();
           case 'keys':
             console.log(clc.greenBright('All keys:'), hashMap.keys());
+
             return run();
           case 'values':
             console.log(clc.greenBright('All values:'), hashMap.values());
+
             return run();
           case 'entries':
             console.log(clc.greenBright('All pairs:'), hashMap.entries());
+
             return run();
 
           // Controls
           case 'b':
             mainHelp();
+
             return mainRun();
           case 'h':
             help();
+
             return run();
           case 'q':
             return quit();
 
           default:
             console.log(clc.redBright('Unknown command'));
+
             return run();
         }
       })
